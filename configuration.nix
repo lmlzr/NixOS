@@ -8,9 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #/etc/nixos/hardware-configuration.nix
       ./modules/essentials.nix
-      #(./modules/${hostname}.nix)
       ./modules/vm.nix
       ./modules/optimizations.nix
       ./modules/de/kde.nix
