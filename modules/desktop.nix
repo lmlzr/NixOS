@@ -17,7 +17,7 @@
     prismlauncher
     steam
     lutris
-    fuzzle
+    fuzzel
   ];
 
 }

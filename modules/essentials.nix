@@ -8,7 +8,6 @@
   neofetch
   wget
   firefox
-  tealdeer
   ];
 
 }

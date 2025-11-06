@@ -6,4 +6,10 @@
     nix.settings.max-jobs = "auto";
     nix.settings.cores = 0;
     boot.kernelPackages = pkgs.linuxPackages_zen;
+    
+    
+    environment.systemPackages = with pkgs; [
+    vscode
+    kitty
+  ];
 }
