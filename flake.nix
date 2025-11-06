@@ -6,7 +6,7 @@
   };
 
   outputs = { self, nixpkgs }: {
-	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+	nixosConfigurations.vm = nixpkgs.lib.nixosSystem { #vm teil je nach name des systems ändern
 		modules = [ ./configuration.nix ];
 	};
 
