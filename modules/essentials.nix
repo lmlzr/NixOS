@@ -9,6 +9,7 @@
   neovim
   neofetch
   wget
+  firefox
   ];
 
 }
