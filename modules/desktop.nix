@@ -13,7 +13,7 @@
     vscode
     kitty
     spotify
-    obs
+    obs-studio
     prismlauncher
     steam
     lutris
