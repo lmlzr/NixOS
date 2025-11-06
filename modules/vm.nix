@@ -5,5 +5,5 @@
 
     nix.settings.max-jobs = "auto";
     nix.settings.cores = 0;
-    boot.kernelPackages = pkgs.linuxPackages_xanmod;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 }

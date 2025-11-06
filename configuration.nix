@@ -10,7 +10,9 @@
       ./hardware-configuration.nix
       #/etc/nixos/hardware-configuration.nix
       ./modules/essentials.nix
-      ./modules/desktop.nix
+      #./modules/desktop.nix
+      #./modules/laptop.nix
+      ./modules/vm.nix
       ./modules/optimizations.nix
       ./modules/de/kde.nix
       #./modules/de/niri.nix
