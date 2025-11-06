@@ -18,6 +18,7 @@
     steam
     lutris
     fuzzel
+    firefox
   ];
 
 }
