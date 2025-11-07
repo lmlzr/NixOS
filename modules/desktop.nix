@@ -19,6 +19,7 @@
     lutris
     fuzzel
     firefox
+    geekbench
   ];
 
 }

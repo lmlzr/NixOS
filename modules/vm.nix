@@ -12,5 +12,6 @@
     vscode
     kitty
     firefox
+    geekbench
   ];
 }
