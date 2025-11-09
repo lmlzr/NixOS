@@ -7,6 +7,7 @@
   neovim
   neofetch
   wget
+  gcc
   ];
 
 }
