@@ -13,5 +13,6 @@
     kitty
     firefox
     geekbench
+    discord
   ];
 }

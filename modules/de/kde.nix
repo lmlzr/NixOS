@@ -12,4 +12,13 @@
     variant = "";
   };
   programs.kdeconnect.enable = true;
-  }
+  /*
+  environment.plasma6.execludePackages = with pkgs.kdePackages; [
+    kate
+  ];
+  */
+
+  environment.plasma6.execludePackages = with pkgs.kdePackages; [
+    kate
+  ];
+}
