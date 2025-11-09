@@ -16,7 +16,19 @@
     lutris
     firefox
     geekbench
+    mangohud
+    protonup
+    bottles
   ];
+
+  #steam settings
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+  environment.sessionVariable = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+      "~/.steam/root/compatibilitytools.d"
+  };
+
 
   #nvidia driver
   hardware.graphics = {

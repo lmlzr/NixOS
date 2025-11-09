@@ -17,8 +17,4 @@
     kate
   ];
   */
-
-  environment.plasma6.execludePackages = with pkgs.kdePackages; [
-    kate
-  ];
 }
