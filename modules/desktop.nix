@@ -19,6 +19,7 @@
     mangohud
     protonup-ng
     bottles
+    preload
   ];
 
   #steam settings
