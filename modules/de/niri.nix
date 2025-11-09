@@ -5,6 +5,5 @@
       wayland.enable = true;
       enable = true;
     };
-
-
 }
+
