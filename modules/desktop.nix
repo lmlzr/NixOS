@@ -24,6 +24,7 @@
     qemu
     kvmtool
     htop
+    waydroid
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
