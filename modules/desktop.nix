@@ -26,8 +26,12 @@
     htop
   ];
   users.groups.libvirtd.members = ["lmlzr"];
+
+
   #virtualisation.libvirt.enable = true;
   #virtualisation.spiceUSBRedirection. enable = true;
+
+
   #steam settings
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
