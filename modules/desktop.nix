@@ -25,6 +25,7 @@
     kvmtool
     htop
     waydroid
+    yazi
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
