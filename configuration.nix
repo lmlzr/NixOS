@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/essentials.nix
-      ./modules/vm.nix
+      ./modules/desktop.nix
       ./modules/optimizations.nix
       ./modules/de/kde.nix
       #./modules/de/niri.nix
@@ -17,7 +17,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "vm"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # Enable networking
   networking.networkmanager.enable = true;

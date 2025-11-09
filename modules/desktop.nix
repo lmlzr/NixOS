@@ -17,16 +17,16 @@
     firefox
     geekbench
     mangohud
-    protonup
+    protonup-ng
     bottles
   ];
 
   #steam settings
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
-  environment.sessionVariable = {
+  environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "~/.steam/root/compatibilitytools.d"
+      "~/.steam/root/compatibilitytools.d";
   };
 
 
