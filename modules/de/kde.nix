@@ -11,4 +11,5 @@
     layout = "de";
     variant = "";
   };
+  programs.kdeconnect.enable = true;
   }
