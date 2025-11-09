@@ -20,8 +20,14 @@
     protonup-ng
     bottles
     preload
+    virt-manager
+    qemu
+    kvmtool
+    htop
   ];
-
+  users.groups.libvirtd.members = ["lmlzr"];
+  #virtualisation.libvirt.enable = true;
+  #virtualisation.spiceUSBRedirection. enable = true;
   #steam settings
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
@@ -29,16 +35,12 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-
-
   #nvidia driver
   hardware.graphics = {
     enable = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
-
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
@@ -59,15 +61,11 @@
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
     # Only available from driver 515.43.04+
     open = false;
-
     # Enable the Nvidia settings menu,
 	# accessible via `nvidia-settings`.
     nvidiaSettings = true;
-
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-
 }
 
