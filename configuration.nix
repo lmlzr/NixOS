@@ -12,6 +12,7 @@
       ./modules/desktop.nix
       ./modules/optimizations.nix
       ./modules/de/kde.nix
+      ./modules/nvidia.nix
       #./modules/de/niri.nix
     ];
   # Bootloader.
@@ -68,8 +69,6 @@
     description = "Leon Melzer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  kdePackages.kate
-    #  thunderbird
     ];
   };
   # Allow unfree packages
