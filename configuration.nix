@@ -13,6 +13,7 @@
       ./modules/optimizations.nix
       ./modules/de/kde.nix
       ./modules/nvidia.nix
+      ./modules/bluetooth.nix
       #./modules/de/niri.nix
     ];
   # Bootloader.

@@ -26,6 +26,7 @@
     htop
     waydroid
     yazi
+    logiops
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
@@ -35,14 +36,14 @@
 
 
   #steam settings
-  /*
+  
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-  */
+  
 
 }
 
