@@ -14,8 +14,8 @@
       ./modules/de/kde.nix
       ./modules/nvidia.nix
       ./modules/bluetooth.nix
-      #./modules/grub.nix
-      ./modules/systemdboot.nix
+      ./modules/grub.nix
+      #./modules/systemdboot.nix
       #./modules/de/niri.nix
     ];
   # Bootloader.
