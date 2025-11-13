@@ -5,7 +5,7 @@
   git
   gh
   neovim
-  neofetch
+  fastfetch
   wget
   gcc
   ];
