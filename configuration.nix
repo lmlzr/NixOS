@@ -13,7 +13,7 @@
       ./modules/optimizations.nix
       ./modules/de/kde.nix
       ./modules/nvidia.nix
-      ./modules/bluetooth.nix
+      ./modules/wireless/bluetooth.nix
       ./modules/boot/grub.nix
       #./modules/boot/systemdboot.nix
       #./modules/de/niri.nix
