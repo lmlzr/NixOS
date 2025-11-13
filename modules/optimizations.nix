@@ -4,7 +4,6 @@
     services.journald.extraConfig = "SystemMaxUse=50M";
     systemd.services.networkManager-wait-online.wantedBy = lib.mkForce [];
     boot.kernelParams = [ "quiet" ];
-    boot.loader.timeout = 1;
     #schneller builden
     nix.settings.max-jobs = "auto";
     nix.settings.cores = 0; 
