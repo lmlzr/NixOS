@@ -9,10 +9,10 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/essentials.nix
-      ./modules/desktop.nix
+      ./modules/system/desktop.nix
       ./modules/optimizations.nix
       ./modules/de/kde.nix
-      ./modules/nvidia.nix
+      ./modules/hardware/nvidia.nix
       ./modules/wireless/bluetooth.nix
       ./modules/boot/grub.nix
       #./modules/boot/systemdboot.nix
