@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./modules/essentials.nix
       ./modules/system/desktop.nix
-      ./modules/optimizations.nix
+      ./modules/hardware/optimizations.nix
       ./modules/de/kde.nix
       ./modules/hardware/nvidia.nix
       ./modules/wireless/bluetooth.nix
