@@ -7,6 +7,7 @@
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.timeout = 5; # for boot menu to show 5 sek
+  boot.kernelParams = [ "quiet" ];
 
   # ...
 

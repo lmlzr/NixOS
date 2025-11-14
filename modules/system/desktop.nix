@@ -27,13 +27,13 @@
     waydroid
     yazi
     logiops
+    heroic
+    parsec-bin
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
-
   #virtualisation.libvirt.enable = true;
   #virtualisation.spiceUSBRedirection. enable = true;
-
 
   #steam settings
   
@@ -43,7 +43,5 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-  
-
 }
 
