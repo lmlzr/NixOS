@@ -10,7 +10,6 @@
     vscode
     kitty
     spotify
-    obs-studio
     prismlauncher
     steam
     lutris
@@ -29,14 +28,21 @@
     logiops
     heroic
     parsec-bin
+    wgnord
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
   #virtualisation.libvirt.enable = true;
   #virtualisation.spiceUSBRedirection. enable = true;
 
+
+
+  #OBS
+  programs.obs-studio = {
+    enable = true;
+    package = pkgs.obs-studio.override {cudaSupport = true;};
+  };
   #steam settings
-  
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
   environment.sessionVariables = {
