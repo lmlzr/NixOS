@@ -8,6 +8,8 @@
   fastfetch
   wget
   gcc
+  pulseaudio
+  stow
   ];
 
 }

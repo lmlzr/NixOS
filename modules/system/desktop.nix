@@ -29,6 +29,9 @@
     heroic
     parsec-bin
     wgnord
+    pavucontrol
+    spotdl
+    mpv
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
