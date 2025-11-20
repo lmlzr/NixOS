@@ -32,6 +32,11 @@
     pavucontrol
     spotdl
     mpv
+    #conky
+    fzf
+    xpipe
+    #clementine
+    #finamp
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 

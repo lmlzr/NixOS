@@ -10,6 +10,7 @@
   gcc
   pulseaudio
   stow
+  socat
   ];
 
 }
