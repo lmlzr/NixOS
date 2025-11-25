@@ -37,6 +37,10 @@
     xpipe
     #clementine
     #finamp
+    hakuneko
+    oneko
+    gimp
+    davinci-resolve
   ];
   users.groups.libvirtd.members = ["lmlzr"];
 
