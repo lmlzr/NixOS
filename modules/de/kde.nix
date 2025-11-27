@@ -12,9 +12,19 @@
     variant = "";
   };
   programs.kdeconnect.enable = true;
-  /*
-  environment.plasma6.execludePackages = with pkgs.kdePackages; [
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
     kate
+    konsole
+    kdepim-runtime
+    kwallet
+    kwalletmanager
+    kwallet-pam
   ];
-  */
+  services.xserver.excludePackages = with pkgs; [ 
+    xterm 
+    ];
+  /*services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "lmlzr";
+  };*/
 }

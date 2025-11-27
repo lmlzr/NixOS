@@ -43,12 +43,9 @@
     davinci-resolve
   ];
   users.groups.libvirtd.members = ["lmlzr"];
-
+  boot.kernelParams = ["zswap.enabled=1"];
   #virtualisation.libvirt.enable = true;
   #virtualisation.spiceUSBRedirection. enable = true;
-
-
-
   #OBS
   programs.obs-studio = {
     enable = true;
@@ -61,5 +58,8 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
+
+
+
 }
 

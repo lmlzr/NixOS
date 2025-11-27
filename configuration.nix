@@ -18,7 +18,6 @@
       #./modules/boot/systemdboot.nix
       #./modules/de/niri.nix
     ];
-  # Bootloader.
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # Enable networking
