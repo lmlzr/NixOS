@@ -12,32 +12,25 @@
     spotify
     prismlauncher
     steam
-    lutris
     firefox
-    geekbench
     mangohud
     protonup-ng
     bottles
-    preload
     virt-manager
     qemu
     kvmtool
     htop
     yazi
-    logiops
+    logiops_0_2_3
     heroic
     parsec-bin
     wgnord
     pavucontrol
     spotdl
     mpv
-    #conky
     fzf
-    xpipe
     #clementine
     #finamp
-    hakuneko
-    oneko
     gimp
     davinci-resolve
   ];
@@ -57,8 +50,5 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-
-
-
 }
 
