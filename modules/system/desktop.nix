@@ -23,7 +23,6 @@
     qemu
     kvmtool
     htop
-    waydroid
     yazi
     logiops
     heroic

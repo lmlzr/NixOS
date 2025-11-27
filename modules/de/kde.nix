@@ -19,6 +19,8 @@
     kwallet
     kwalletmanager
     kwallet-pam
+    khelpcenter
+    kinfocenter
   ];
   services.xserver.excludePackages = with pkgs; [ 
     xterm 
