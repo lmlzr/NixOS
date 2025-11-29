@@ -21,23 +21,23 @@
     kvmtool
     htop
     yazi
-    logiops_0_2_3
     heroic
     parsec-bin
-    wgnord
     pavucontrol
-    spotdl
     mpv
     fzf
-    #clementine
-    #finamp
     gimp
     davinci-resolve
+    wgnord
+    #clementine
+    #finamp
+    #spotdl
   ];
-  users.groups.libvirtd.members = ["lmlzr"];
   boot.kernelParams = ["zswap.enabled=1"];
+  users.groups.libvirtd.members = ["lmlzr"];
   #virtualisation.libvirt.enable = true;
   #virtualisation.spiceUSBRedirection. enable = true;
+
   #OBS
   programs.obs-studio = {
     enable = true;

@@ -8,7 +8,6 @@
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
-
     environment.systemPackages = with pkgs; [
        vulkan-loader
        vulkan-validation-layers
@@ -31,4 +30,12 @@
             ];
        };
    };
+   # allow overclocking
+    hardware.nvidia.prime.offload.enable = false; # falls du kein Hybrid-System hast
+    services.xserver.displayManager.setupCommands = ''
+    nvidia-settings -a '[gpu:0]/GPUPowerMizerMode=1'
+    '';
+    services.xserver.deviceSection = ''
+    Option "Coolbits" "8"
+    '';
 }
