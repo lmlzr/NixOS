@@ -8,7 +8,7 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.timeout = 5; # for boot menu to show 5 sek
   boot.kernelParams = [ "quiet" ];
-  boot.loader.grub.splashImage = ./splash.jpg;
+  #boot.loader.grub.splashImage = ./splash.jpg;
   # ...
 
 }
