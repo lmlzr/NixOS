@@ -31,7 +31,7 @@
        };
    };
    # allow overclocking
-    hardware.nvidia.prime.offload.enable = false; # falls du kein Hybrid-System hast
+    hardware.nvidia.prime.offload.enable = false; 
     services.xserver.displayManager.setupCommands = ''
     nvidia-settings -a '[gpu:0]/GPUPowerMizerMode=1'
     '';

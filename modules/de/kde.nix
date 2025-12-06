@@ -11,7 +11,7 @@
     layout = "de";
     variant = "";
   };
-  programs.kdeconnect.enable = true;
+  #programs.kdeconnect.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     kate
     konsole
@@ -25,8 +25,8 @@
   services.xserver.excludePackages = with pkgs; [ 
     xterm 
     ];
-  /*services.displayManager = {
+  services.displayManager = {
     autoLogin.enable = true;
     autoLogin.user = "lmlzr";
-  };*/
+  };
 }
