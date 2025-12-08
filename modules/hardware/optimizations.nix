@@ -11,10 +11,4 @@
         automatic = true;
         options = "--delete-older-than 10d";
     };
-    environment.systemPackages = with pkgs; [
-        preload
-    ];
-
-
-    
 }

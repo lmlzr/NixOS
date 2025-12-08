@@ -16,9 +16,9 @@
     kate
     konsole
     kdepim-runtime
-    #kwallet
-    #kwalletmanager
-    #kwallet-pam
+    kwallet
+    kwalletmanager
+    kwallet-pam
     khelpcenter
     kinfocenter
   ];

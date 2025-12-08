@@ -29,6 +29,7 @@
     davinci-resolve
     wgnord
     gamemode
+    cava
     #clementine
     #finamp
     #spotdl
