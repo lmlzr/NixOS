@@ -87,5 +87,12 @@
   programs.adb.enable = true;
   users.users.lmlzr.extraGroups = ["adbusers"];
 
+  #waydorid funktioniert nur mit systemd
+  hardware.opengl.enable = true;
+  virtualisation.waydroid.enable = true;
+  #ADB
+  programs.adb.enable = true;
+  users.users.lmlzr.extraGroups = ["adbusers"];
+
 }
 
