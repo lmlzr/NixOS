@@ -51,6 +51,7 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
+  /*
   boot.kernelParams = [
     "scsi_mod.use_blk_mq=1"
     "dm_mod.use_blk_mq=Y"
@@ -79,7 +80,7 @@
       ExecStart = ''/bin/sh -c "echo 10 > /proc/irq/112/smp_affinity"'';
     };
   };
-
+*/
   #waydorid funktioniert nur mit systemd
   virtualisation.waydroid.enable = true;
   #activate ADB

@@ -14,7 +14,7 @@
       ./modules/de/kde.nix
       ./modules/hardware/nvidia.nix
       ./modules/wireless/bluetooth.nix
-      ./modules/boot/systemdboot.nix
+      ./modules/boot/grub.nix
     ];
   networking.hostName = "nixos"; # Define your hostname.
   # Enable networking
