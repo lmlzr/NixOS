@@ -51,46 +51,14 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-  /*
   boot.kernelParams = [
-    "scsi_mod.use_blk_mq=1"
-    "dm_mod.use_blk_mq=Y"
     "mitigations=off"
     "zswap.enabled=1"
-    "iommu=pt"
-    "systemd.unified_cgroup_hierarchy=0"
   ];
-  boot.kernel.sysctl = {
-    "vm.dirty_ratio" = 15;
-    "vm.dirty_background_ratio" = 5;
-    "kernel.sched_autogroup_enabled" = 0;
-    "kernel.sched_min_granularity_ns" = 10000000;
-    "kernel.sched_wakeup_granularity_ns" = 15000000;
-    "net.core.rmem_max" = 16777216;
-    "net.core.wmem_max" = 16777216;
-    "net.ipv4.tcp_fastopen" = 3;
-  };
 
-  systemd.services.set-gpu-irq = {
-    description = "Set GPU IRQ Affinity";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "sysinit.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = ''/bin/sh -c "echo 10 > /proc/irq/112/smp_affinity"'';
-    };
-  };
-*/
   #waydorid funktioniert nur mit systemd
   virtualisation.waydroid.enable = true;
   #activate ADB
-  programs.adb.enable = true;
-  users.users.lmlzr.extraGroups = ["adbusers"];
-
-  #waydorid funktioniert nur mit systemd
-  hardware.opengl.enable = true;
-  virtualisation.waydroid.enable = true;
-  #ADB
   programs.adb.enable = true;
   users.users.lmlzr.extraGroups = ["adbusers"];
 

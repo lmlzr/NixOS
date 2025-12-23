@@ -31,6 +31,13 @@
        };
    };
    # allow overclocking
+    boot.kernelParams = [
+    "modprobe.blacklist=nouveau"
+    "nvidia-drm.modeset=0"
+    ];   
+    boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+
+
     hardware.nvidia.prime.offload.enable = false; 
     services.xserver.displayManager.setupCommands = ''
     nvidia-settings -a '[gpu:0]/GPUPowerMizerMode=1'
@@ -38,4 +45,5 @@
     services.xserver.deviceSection = ''
     Option "Coolbits" "8"
     '';
+    
 }
