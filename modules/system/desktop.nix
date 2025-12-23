@@ -51,9 +51,6 @@
     STEAM_EXTRA_COMPAT_TOOLS_PATHS =
       "~/.steam/root/compatibilitytools.d";
   };
-  # enable rdp
-  services.xrdp.enable = true;
-
   boot.kernelParams = [
     "scsi_mod.use_blk_mq=1"
     "dm_mod.use_blk_mq=Y"
