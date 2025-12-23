@@ -61,7 +61,6 @@
     "zswap.enabled=1"
     "iommu=pt"
     "systemd.unified_cgroup_hierarchy=0"
-
   ];
   boot.kernel.sysctl = {
     "vm.dirty_ratio" = 15;
@@ -85,9 +84,8 @@
   };
 
   #waydorid funktioniert nur mit systemd
-  hardware.opengl.enable = true;
   virtualisation.waydroid.enable = true;
-  #ADB
+  #activate ADB
   programs.adb.enable = true;
   users.users.lmlzr.extraGroups = ["adbusers"];
 
