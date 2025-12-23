@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   services.xserver.enable = true;
-
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -16,19 +15,10 @@
     kate
     konsole
     kdepim-runtime
-    #kwallet
-    #kwalletmanager
-    #kwallet-pam
     khelpcenter
     kinfocenter
   ];
   services.xserver.excludePackages = with pkgs; [ 
     xterm 
     ];
-  /*
-  services.displayManager = {
-    autoLogin.enable = true;
-    autoLogin.user = "lmlzr";
-  };
-  */
 }
