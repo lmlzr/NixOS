@@ -3,6 +3,7 @@
   systemd.services."systemd-oomd".enable = false;
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
   environment.systemPackages = with pkgs; [
     discord
@@ -38,6 +39,17 @@
     android-tools
     scrcpy
     makemkv
+    handbrake
+    bat
+    baobab
+    webcamoid
+    cheese
+    amarok
+    libreoffice-qt
+    hunspell
+    hunspellDicts.de_DE
+    goverlay
+    flatpak
   ];
   #OBS
   programs.obs-studio = {
@@ -85,11 +97,20 @@
   };
 
   #waydorid funktioniert nur mit systemd
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   virtualisation.waydroid.enable = true;
   #ADB
   programs.adb.enable = true;
   users.users.lmlzr.extraGroups = ["adbusers"];
+
+
+  fileSystems."/mnt/Big_SSD" =
+    { device = "/dev/nvme0n1p1";
+      fsType = "ntfs-3g";
+      options = [ "uid=1000" "gid=1000" "umask=022"];
+    };
+
+
 
 }
 

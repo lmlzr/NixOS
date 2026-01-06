@@ -15,8 +15,7 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     kate
     konsole
-    kdepim-runtime
-
+    #kdepim-runtime
     khelpcenter
     kinfocenter
   ];
