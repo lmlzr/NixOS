@@ -11,4 +11,5 @@
         automatic = true;
         options = "--delete-older-than 10d";
     };
+    boot.kernelModules = [ "sg" ];
 }

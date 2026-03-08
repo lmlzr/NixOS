@@ -7,7 +7,7 @@
   };
 
   outputs = { self, nixpkgs,preload-ng, ... }: {
-	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem { #vm teil je nach name des systems ändern
+	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 		modules = [ 
       ./configuration.nix 
       preload-ng.nixosModules.default

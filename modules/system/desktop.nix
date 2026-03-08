@@ -3,7 +3,6 @@
   systemd.services."systemd-oomd".enable = false;
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
   environment.systemPackages = with pkgs; [
     discord
@@ -34,12 +33,11 @@
     #clementine
     #finamp
     #spotdl
-    waydroid
     universal-android-debloater
     android-tools
     scrcpy
     makemkv
-    handbrake
+    #handbrake
     bat
     baobab
     webcamoid
@@ -50,6 +48,20 @@
     hunspellDicts.de_DE
     goverlay
     flatpak
+    virt-manager
+    virt-viewer
+    azahar
+    dolphin-emu
+    melonds
+    mgba
+    remmina
+    localsend
+    #ffmpeg
+    qpwgraph
+    manga-tui
+    element-desktop
+    nmap
+    coturn
   ];
   #OBS
   programs.obs-studio = {
@@ -95,22 +107,32 @@
       ExecStart = ''/bin/sh -c "echo 10 > /proc/irq/112/smp_affinity"'';
     };
   };
-
-  #waydorid funktioniert nur mit systemd
-  hardware.graphics.enable = true;
-  virtualisation.waydroid.enable = true;
-  #ADB
-  programs.adb.enable = true;
+  services.flatpak.enable = true;  #ADB
   users.users.lmlzr.extraGroups = ["adbusers"];
-
-
   fileSystems."/mnt/Big_SSD" =
     { device = "/dev/nvme0n1p1";
       fsType = "ntfs-3g";
       options = [ "uid=1000" "gid=1000" "umask=022"];
     };
 
+virtualisation.libvirtd.enable = true;
+virtualisation.spiceUSBRedirection.enable = true;
 
+
+  virtualisation.waydroid.enable = true;
+  boot.kernelModules = [
+    "binder_linux"
+  ];
+  
+
+fonts = {
+  enableDefaultPackages = false;
+
+  packages = [
+    pkgs.noto-fonts
+    pkgs.noto-fonts-color-emoji
+  ];
+};
 
 }
 
