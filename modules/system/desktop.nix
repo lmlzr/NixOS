@@ -3,7 +3,8 @@
   systemd.services."systemd-oomd".enable = false;
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
+  # boot.kernelPackages = pkgs.linuxPackages_latest;  
+  
   environment.systemPackages = with pkgs; [
     discord
     obsidian
@@ -60,8 +61,6 @@
     qpwgraph
     manga-tui
     element-desktop
-    nmap
-    coturn
   ];
   #OBS
   programs.obs-studio = {
