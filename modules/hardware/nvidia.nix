@@ -31,6 +31,10 @@
             ];
        };
    };
+    nixpkgs.config = {
+        allowUnfree = true;
+        cudaSupport = true;
+    };
    # allow overclocking
     hardware.nvidia.prime.offload.enable = false; 
     services.xserver.displayManager.setupCommands = ''

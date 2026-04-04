@@ -60,7 +60,7 @@
   users.users.lmlzr = {
     isNormalUser = true;
     description = "Leon Melzer";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "video" "cdrom" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "video" "cdrom" "waydroid" ];
     packages = with pkgs; [
     ];
   };

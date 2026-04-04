@@ -38,7 +38,7 @@
     android-tools
     scrcpy
     makemkv
-    #handbrake
+    handbrake
     bat
     baobab
     webcamoid
@@ -61,6 +61,7 @@
     qpwgraph
     manga-tui
     element-desktop
+    speedtest-cli
   ];
   #OBS
   programs.obs-studio = {
@@ -95,6 +96,7 @@
     "net.core.rmem_max" = 16777216;
     "net.core.wmem_max" = 16777216;
     "net.ipv4.tcp_fastopen" = 3;
+    "net.ipv4.ip_forward" = 1;
   };
 
   systemd.services.set-gpu-irq = {
@@ -117,13 +119,6 @@
 virtualisation.libvirtd.enable = true;
 virtualisation.spiceUSBRedirection.enable = true;
 
-
-  virtualisation.waydroid.enable = true;
-  boot.kernelModules = [
-    "binder_linux"
-  ];
-  
-
 fonts = {
   enableDefaultPackages = false;
 
@@ -132,6 +127,7 @@ fonts = {
     pkgs.noto-fonts-color-emoji
   ];
 };
+
 
 }
 
