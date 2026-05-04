@@ -16,7 +16,7 @@
     firefox
     mangohud
     protonup-ng
-    bottles
+    #bottles
     qemu
     kvmtool
     htop
@@ -62,6 +62,7 @@
     manga-tui
     element-desktop
     speedtest-cli
+    libbluray
   ];
   #OBS
   programs.obs-studio = {
