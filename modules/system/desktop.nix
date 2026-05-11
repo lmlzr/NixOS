@@ -63,6 +63,7 @@
     element-desktop
     speedtest-cli
     libbluray
+    keepassxc
   ];
   #OBS
   programs.obs-studio = {
