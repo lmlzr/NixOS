@@ -64,6 +64,7 @@
     speedtest-cli
     libbluray
     keepassxc
+    calibre
   ];
   #OBS
   programs.obs-studio = {
