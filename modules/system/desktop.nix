@@ -38,7 +38,6 @@
     android-tools
     scrcpy
     makemkv
-    handbrake
     bat
     baobab
     webcamoid
@@ -57,7 +56,7 @@
     mgba
     remmina
     localsend
-    #ffmpeg
+    ffmpeg
     qpwgraph
     manga-tui
     element-desktop
@@ -65,11 +64,17 @@
     libbluray
     keepassxc
     calibre
+    radeontop
+    amdenc
+    mesa
+    libva
+    libva-utils
+    handbrake
   ];
   #OBS
   programs.obs-studio = {
     enable = true;
-    package = pkgs.obs-studio.override {cudaSupport = true;};
+    #package = pkgs.obs-studio.override {cudaSupport = true;};
   };
   #steam settings
   programs.steam.gamescopeSession.enable = true;
@@ -131,6 +136,19 @@ fonts = {
   ];
 };
 
+
+hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.amdgpu.initrd.enable = true;
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "radeonsi";
+  };
 
 }
 
