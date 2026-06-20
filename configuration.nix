@@ -11,8 +11,8 @@
       ./modules/essentials.nix
       ./modules/system/desktop.nix
       ./modules/hardware/optimizations.nix
-      #./modules/de/kde.nix
-      ./modules/de/niri.nix
+      ./modules/de/kde.nix
+      #./modules/de/niri.nix
       #./modules/hardware/nvidia.nix
       ./modules/wireless/bluetooth.nix
       ./modules/boot/systemdboot.nix
