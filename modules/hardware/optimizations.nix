@@ -1,7 +1,6 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-    services.journald.extraConfig = "SystemMaxUse=50M";
     systemd.services.networkManager-wait-online.wantedBy = lib.mkForce [];
     #schneller builden
     nix.settings.max-jobs = "auto";

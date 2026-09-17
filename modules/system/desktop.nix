@@ -2,8 +2,8 @@
 {
   systemd.services."systemd-oomd".enable = false;
   boot.initrd.systemd.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;  
+  #boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;  
   
   environment.systemPackages = with pkgs; [
     discord
@@ -70,6 +70,9 @@
     libva
     libva-utils
     handbrake
+    monero-gui
+    iperf3
+    ethtool
   ];
   #OBS
   programs.obs-studio = {

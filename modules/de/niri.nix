@@ -1,8 +1,8 @@
 { config, pkgs, inputs, ... }:
 
 {
+  programs.xwayland.enable = true;
   programs.niri.enable = true;
-  programs.noctalia.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
@@ -14,6 +14,8 @@
     kanshi
     thunar
     quickshell
+    xwayland
+    xwayland-sattelite
   ];
 
   networking.networkmanager.enable = true;
@@ -23,3 +25,4 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 }
+ 
