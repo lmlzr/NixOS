@@ -1,4 +1,12 @@
 { config, pkgs, ... }:
+let
+  kvmtool = pkgs.kvmtool.overrideAttrs (old: {
+    env = (old.env or {}) // {
+      NIX_CFLAGS_COMPILE =
+        "${(old.env or {}).NIX_CFLAGS_COMPILE or ""} -Wno-error=attributes";
+    };
+  });
+in
 {
   systemd.services."systemd-oomd".enable = false;
   boot.initrd.systemd.enable = true;
@@ -73,6 +81,9 @@
     monero-gui
     iperf3
     ethtool
+    teamspeak6-client
+    claude-code
+    claude-monitor
   ];
   #OBS
   programs.obs-studio = {
