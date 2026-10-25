@@ -15,7 +15,7 @@
     thunar
     quickshell
     xwayland
-    xwayland-sattelite
+    xwayland-satellite
   ];
 
   networking.networkmanager.enable = true;

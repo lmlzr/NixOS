@@ -1,14 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-    systemd.services."systemd-oomd".enable = false;
-    boot.initrd.systemd.enable = true;
+  imports = [ ../common.nix ];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
-    nix.settings.max-jobs = "auto";
-    nix.settings.cores = 0;
-    boot.kernelPackages = pkgs.linuxPackages_zen;
-    
-    
-    environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     vscode
     kitty
     firefox

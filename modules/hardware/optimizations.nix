@@ -1,14 +1,18 @@
-{ config, pkgs, lib, inputs, ... }:
+{ lib, ... }:
 
 {
-    systemd.services.networkManager-wait-online.wantedBy = lib.mkForce [];
-    #schneller builden
-    nix.settings.max-jobs = "auto";
-    nix.settings.cores = 0; 
-    #auto delete old versions welche älter als 10 tage sind
-    nix.gc = {
-        automatic = true;
-        options = "--delete-older-than 10d";
-    };
-    boot.kernelModules = [ "sg" ];
+  systemd.services.networkManager-wait-online.wantedBy = lib.mkForce [ ];
+
+  nix.settings.auto-optimise-store = true;
+  # alte Generationen löschen, die älter als 10 Tage sind
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 10d";
+  };
+
+  # komprimierter Swap im RAM
+  zramSwap.enable = true;
+
+  boot.kernelModules = [ "sg" ];
 }

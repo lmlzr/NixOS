@@ -12,6 +12,8 @@
     variant = "";
   };
   #programs.kdeconnect.enable = true;
+  # KDE PIM (Kontact, Merkuro Kontakte/Kalender, KMail, Akonadi) wird nicht genutzt
+  programs.kde-pim.enable = false;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     kate
     konsole

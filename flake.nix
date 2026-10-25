@@ -4,7 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    preload-ng.url = "github:miguel-b-p/preload-ng";
+    preload-ng = {
+      url = "github:miguel-b-p/preload-ng";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
@@ -12,27 +15,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, preload-ng, ... }@inputs:
-  let
-    system = "x86_64-linux";
-  in
-  {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
+  outputs =
+    { nixpkgs, preload-ng, ... }@inputs:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
-      specialArgs = {
-        inherit inputs;
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+
+        modules = [
+          ./configuration.nix
+          preload-ng.nixosModules.default
+          { services.preload-ng.enable = true; }
+        ];
       };
-
-      modules = [
-        ./configuration.nix
-
-        preload-ng.nixosModules.default
-
-        {
-          services.preload-ng.enable = true;
-        }
-      ];
     };
-  };
 }

@@ -1,18 +1,17 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   kvmtool = pkgs.kvmtool.overrideAttrs (old: {
-    env = (old.env or {}) // {
-      NIX_CFLAGS_COMPILE =
-        "${(old.env or {}).NIX_CFLAGS_COMPILE or ""} -Wno-error=attributes";
+    env = (old.env or { }) // {
+      NIX_CFLAGS_COMPILE = "${(old.env or { }).NIX_CFLAGS_COMPILE or ""} -Wno-error=attributes";
     };
   });
 in
 {
-  systemd.services."systemd-oomd".enable = false;
-  boot.initrd.systemd.enable = true;
+  imports = [ ../common.nix ];
+
   #boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackages_latest;  
-  
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   environment.systemPackages = with pkgs; [
     discord
     obsidian
@@ -20,10 +19,8 @@ in
     kitty
     spotify
     prismlauncher
-    steam
     firefox
     mangohud
-    protonup-ng
     #bottles
     qemu
     kvmtool
@@ -36,8 +33,7 @@ in
     fzf
     gimp
     davinci-resolve
-    wgnord
-    gamemode
+    proton-vpn
     cava
     #clementine
     #finamp
@@ -49,14 +45,11 @@ in
     bat
     baobab
     webcamoid
-    cheese
     amarok
     libreoffice-qt
     hunspell
     hunspellDicts.de_DE
     goverlay
-    flatpak
-    virt-manager
     virt-viewer
     azahar
     dolphin-emu
@@ -74,8 +67,6 @@ in
     calibre
     radeontop
     amdenc
-    mesa
-    libva
     libva-utils
     handbrake
     monero-gui
@@ -84,85 +75,71 @@ in
     teamspeak6-client
     claude-code
     claude-monitor
+    tmux
   ];
+
   #OBS
   programs.obs-studio = {
     enable = true;
     #package = pkgs.obs-studio.override {cudaSupport = true;};
   };
+
   #steam settings
-  programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "~/.steam/root/compatibilitytools.d";
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+    # Proton-GE deklarativ; manuell installierte in ~/.steam/root/compatibilitytools.d findet Steam weiterhin
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
+  programs.gamemode.enable = true;
+
   # enable rdp
   services.xrdp.enable = true;
 
-  boot.kernelParams = [
-    "scsi_mod.use_blk_mq=1"
-    "dm_mod.use_blk_mq=Y"
-    "mitigations=off"
-    "zswap.enabled=1"
-    "iommu=pt"
-    "systemd.unified_cgroup_hierarchy=0"
-
-  ];
+  boot.kernelParams = [ "iommu=pt" ];
   boot.kernel.sysctl = {
     "vm.dirty_ratio" = 15;
     "vm.dirty_background_ratio" = 5;
     "kernel.sched_autogroup_enabled" = 0;
-    "kernel.sched_min_granularity_ns" = 10000000;
-    "kernel.sched_wakeup_granularity_ns" = 15000000;
     "net.core.rmem_max" = 16777216;
     "net.core.wmem_max" = 16777216;
     "net.ipv4.tcp_fastopen" = 3;
-    "net.ipv4.ip_forward" = 1;
   };
 
-  systemd.services.set-gpu-irq = {
-    description = "Set GPU IRQ Affinity";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "sysinit.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = ''/bin/sh -c "echo 10 > /proc/irq/112/smp_affinity"'';
-    };
+  services.flatpak.enable = true;
+
+  fileSystems."/mnt/Big_SSD" = {
+    device = "/dev/disk/by-uuid/E8F8D591F8D55E7E";
+    # ntfs-3g statt ntfs3: Proton-Prefixe enthalten ntfs-3g-Symlinks (IntxLNK), die ntfs3 nicht lesen kann
+    fsType = "ntfs-3g";
+    options = [
+      "uid=1000"
+      "gid=100"
+      "umask=022"
+      "nofail"
+    ];
   };
-  services.flatpak.enable = true;  #ADB
-  users.users.lmlzr.extraGroups = ["adbusers"];
-  fileSystems."/mnt/Big_SSD" =
-    { device = "/dev/nvme0n1p1";
-      fsType = "ntfs-3g";
-      options = [ "uid=1000" "gid=1000" "umask=022"];
-    };
 
-virtualisation.libvirtd.enable = true;
-virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  programs.virt-manager.enable = true;
 
-fonts = {
-  enableDefaultPackages = false;
+  fonts = {
+    enableDefaultPackages = false;
+    packages = [
+      pkgs.noto-fonts
+      pkgs.noto-fonts-color-emoji
+    ];
+  };
 
-  packages = [
-    pkgs.noto-fonts
-    pkgs.noto-fonts-color-emoji
-  ];
-};
-
-
-hardware.graphics = {
+  hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
-
   services.xserver.videoDrivers = [ "amdgpu" ];
-
   hardware.amdgpu.initrd.enable = true;
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "radeonsi";
   };
-
 }
-
