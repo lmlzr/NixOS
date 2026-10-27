@@ -109,13 +109,12 @@ in
   services.flatpak.enable = true;
 
   fileSystems."/mnt/Big_SSD" = {
-    device = "/dev/disk/by-uuid/E8F8D591F8D55E7E";
-    # ntfs-3g statt ntfs3: Proton-Prefixe enthalten ntfs-3g-Symlinks (IntxLNK), die ntfs3 nicht lesen kann
-    fsType = "ntfs-3g";
+    # Crucial P1 2 TB, seit 10/2026 btrfs statt NTFS (schneller fuer Steam/Proton, Windows nutzt sie nicht mehr)
+    device = "/dev/disk/by-label/BIGSSD";
+    fsType = "btrfs";
     options = [
-      "uid=1000"
-      "gid=100"
-      "umask=022"
+      "compress=zstd:1"
+      "noatime"
       "nofail"
     ];
   };
