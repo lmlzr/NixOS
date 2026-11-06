@@ -192,10 +192,13 @@ let
       awk '{printf "VRAM belegt: %.1f GB\n", $1/1e9}' /sys/class/drm/card1/device/mem_info_vram_used
     }
     start() {
-      systemctl start "''${units[@]}" && echo "KI läuft: http://localhost:3000 (Handy: http://10.0.0.193:3000)"
+      # einzeln, sonst greift die polkit-Regel nicht (Sammelauftrag ohne Unit-Namen)
+      for u in "''${units[@]}"; do systemctl start "$u" || return 1; done
+      echo "KI läuft: http://localhost:3000 (Handy: http://10.0.0.193:3000)"
     }
     stop() {
-      systemctl stop "''${units[@]}" && echo "KI aus."
+      for u in "''${units[@]}"; do systemctl stop "$u"; done
+      echo "KI aus."
     }
     case "''${1:-toggle}" in
       start | an) start ;;
@@ -329,4 +332,7 @@ in
   };
   systemd.services.podman-open-webui.unitConfig.RequiresMountsFor = aiDir;
   systemd.services.podman-comfyui.unitConfig.RequiresMountsFor = aiDir;
+  # Container werden beim Stoppen ggf. gekillt, das ist normal
+  systemd.services.podman-comfyui.serviceConfig.SuccessExitStatus = "137 143";
+  systemd.services.podman-open-webui.serviceConfig.SuccessExitStatus = "137 143";
 }
