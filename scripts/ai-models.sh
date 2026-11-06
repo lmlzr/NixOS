@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Laedt die Modelle fuer modules/system/ai.nix nach /mnt/Big_SSD/ai (~77 GB).
+# Laedt die Modelle fuer modules/system/ai.nix nach /mnt/Big_SSD/ai (~70 GB).
 # Fortsetzbar: abgebrochene Downloads laufen beim naechsten Aufruf weiter.
 set -euo pipefail
 
@@ -23,7 +23,6 @@ get unsloth/Qwen3.6-35B-A3B-GGUF Qwen3.6-35B-A3B-UD-IQ4_XS.gguf             "$AI
 get unsloth/Qwen3.6-35B-A3B-GGUF mmproj-F16.gguf                            "$AI/llm/mmproj-Qwen3.6-35B-A3B-F16.gguf"
 
 # ohne Ablehnungen (uncensored / abliterated)
-get HauhauCS/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf "$AI/llm/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf"
 get huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated-MTP-GGUF Huihui-Qwen3.6-35B-A3B-abliterated-ggml-model-Q4_K.gguf "$AI/llm/Huihui-Qwen3.6-35B-A3B-abliterated-Q4_K.gguf"
 get huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated-MTP-GGUF mmproj-model-f16.gguf "$AI/llm/mmproj-Huihui-Qwen3.6-35B-A3B-f16.gguf"
 

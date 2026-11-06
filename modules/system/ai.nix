@@ -216,10 +216,6 @@ in
           ttl = 600;
         };
         # ohne Ablehnungen (abliterated/uncensored), fuer Erwachsenen-Inhalte
-        "gemma-4-12b-uncensored" = {
-          cmd = serve "-m ${llmDir}/Gemma4-12B-QAT-Uncensored-HauhauCS-Balanced-Q4_K_M.gguf --mmproj ${llmDir}/mmproj-gemma-4-12b-it-qat-q4_0.gguf -c 32768";
-          ttl = 600;
-        };
         "qwen3.6-35b-abliterated" = {
           cmd = serve "-m ${llmDir}/Huihui-Qwen3.6-35B-A3B-abliterated-Q4_K.gguf --mmproj ${llmDir}/mmproj-Huihui-Qwen3.6-35B-A3B-f16.gguf -c 32768";
           ttl = 600;
