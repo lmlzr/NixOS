@@ -221,6 +221,9 @@ in
     serviceConfig.MemoryDenyWriteExecute = lib.mkForce false;
   };
 
+  # nur Open WebUI ins LAN, ComfyUI/llama-swap bleiben auf localhost
+  networking.firewall.interfaces."enp14s0".allowedTCPPorts = [ 3000 ];
+
   virtualisation.podman.enable = true;
   virtualisation.oci-containers.backend = "podman";
 
@@ -230,7 +233,7 @@ in
       volumes = [ "${aiDir}/open-webui:/app/backend/data" ];
       extraOptions = [ "--network=host" ];
       environment = {
-        HOST = "127.0.0.1";
+        HOST = "0.0.0.0"; # LAN (Handy): http://10.0.0.193:3000
         PORT = "3000";
         ENABLE_OLLAMA_API = "False";
         OPENAI_API_BASE_URL = "http://127.0.0.1:9292/v1";
