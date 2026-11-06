@@ -24,6 +24,7 @@ let
       "$VENV/bin/pip" install --no-cache-dir -r /app/requirements.txt
       echo "$WANT" > "$VENV/.stamp"
     fi
+    mkdir -p /data/custom_nodes /data/input /data/output /data/models /data/user /data/temp
     cd /data
     exec "$VENV/bin/python" /app/main.py --base-directory /data \
       --listen 127.0.0.1 --port 8188 --disable-smart-memory
