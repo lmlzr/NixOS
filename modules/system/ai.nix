@@ -253,12 +253,17 @@ in
       image = "docker.io/library/python:3.13-slim";
       entrypoint = "/bin/sh";
       cmd = [ "/entry.sh" ];
+      # als lmlzr, damit generierte Bilder in output/ dir gehoeren
+      user = "1000:100";
       volumes = [
         "${aiDir}/comfyui:/data"
         "${comfySrc}:/app:ro"
         "${comfyEntry}:/entry.sh:ro"
       ];
-      environment.PYTHONDONTWRITEBYTECODE = "1";
+      environment = {
+        PYTHONDONTWRITEBYTECODE = "1";
+        HOME = "/data/user";
+      };
       extraOptions = [
         "--network=host"
         "--device=/dev/kfd"
