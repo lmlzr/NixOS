@@ -183,6 +183,9 @@ in
   environment.systemPackages = [
     llamaCpp
     pkgs.nvtopPackages.amd
+    # lokale Coding-Agenten (an llama-swap angebunden, Config in ~/.pi/agent und ~/.config/opencode)
+    pkgs.pi-coding-agent
+    pkgs.opencode
   ];
 
   environment.shellAliases.ki-unload = "curl -s http://127.0.0.1:9292/unload";
@@ -209,7 +212,7 @@ in
         };
         # MoE 35B/3B aktiv: Experten teils im RAM, gut fuer Code und schwere Fragen, versteht Bilder
         "qwen3.6-35b-a3b" = {
-          cmd = serve "-m ${llmDir}/Qwen3.6-35B-A3B-UD-IQ4_XS.gguf --mmproj ${llmDir}/mmproj-Qwen3.6-35B-A3B-F16.gguf -c 32768";
+          cmd = serve "-m ${llmDir}/Qwen3.6-35B-A3B-UD-IQ4_XS.gguf --mmproj ${llmDir}/mmproj-Qwen3.6-35B-A3B-F16.gguf -c 65536";
           ttl = 600;
         };
         # ohne Ablehnungen (abliterated/uncensored), fuer Erwachsenen-Inhalte
