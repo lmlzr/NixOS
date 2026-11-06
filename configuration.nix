@@ -11,6 +11,7 @@
       ./modules/essentials.nix
       ./modules/system/desktop.nix
       ./modules/system/ai.nix
+      ./modules/hardware/amdgpu-power.nix
       ./modules/hardware/optimizations.nix
       ./modules/de/kde.nix
       #./modules/de/niri.nix
