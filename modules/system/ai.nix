@@ -178,6 +178,35 @@ let
       node_ids = [ "13" ];
     }
   ];
+
+  # kein Autostart; an/aus per `ki` (ComfyUI dreht im Leerlauf einen CPU-Kern)
+  kiUnits = [
+    "llama-swap.service"
+    "podman-comfyui.service"
+    "podman-open-webui.service"
+  ];
+  kiCmd = pkgs.writeShellScriptBin "ki" ''
+    units=(${lib.concatStringsSep " " kiUnits})
+    status() {
+      for u in "''${units[@]}"; do printf '%-26s %s\n' "$u" "$(systemctl is-active "$u")"; done
+      awk '{printf "VRAM belegt: %.1f GB\n", $1/1e9}' /sys/class/drm/card1/device/mem_info_vram_used
+    }
+    start() {
+      systemctl start "''${units[@]}" && echo "KI läuft: http://localhost:3000 (Handy: http://10.0.0.193:3000)"
+    }
+    stop() {
+      systemctl stop "''${units[@]}" && echo "KI aus."
+    }
+    case "''${1:-toggle}" in
+      start | an) start ;;
+      stop | aus) stop ;;
+      status) status ;;
+      toggle)
+        if systemctl is-active -q podman-open-webui.service; then stop; else start; fi
+        ;;
+      *) echo "Benutzung: ki [start|stop|status]  (ohne Argument: umschalten)" ;;
+    esac
+  '';
 in
 {
   environment.systemPackages = [
@@ -186,9 +215,21 @@ in
     # lokale Coding-Agenten (an llama-swap angebunden, Config in ~/.pi/agent und ~/.config/opencode)
     pkgs.pi-coding-agent
     pkgs.opencode
+    kiCmd
   ];
 
   environment.shellAliases.ki-unload = "curl -s http://127.0.0.1:9292/unload";
+
+  # `ki` darf die KI-Dienste ohne Passwort starten/stoppen
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.systemd1.manage-units" &&
+          subject.user == "lmlzr" &&
+          ${builtins.toJSON kiUnits}.indexOf(action.lookup("unit")) >= 0) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   systemd.tmpfiles.rules = [
     "d ${aiDir} 0755 lmlzr users -"
@@ -224,6 +265,7 @@ in
     };
   };
   systemd.services.llama-swap = {
+    wantedBy = lib.mkForce [ ];
     unitConfig.RequiresMountsFor = aiDir;
     # Vulkan-Treiber (RADV) mag W^X-Sperre nicht immer
     serviceConfig.MemoryDenyWriteExecute = lib.mkForce false;
@@ -238,6 +280,7 @@ in
   virtualisation.oci-containers.containers = {
     open-webui = {
       image = "ghcr.io/open-webui/open-webui:main";
+      autoStart = false;
       volumes = [ "${aiDir}/open-webui:/app/backend/data" ];
       extraOptions = [ "--network=host" ];
       environment = {
@@ -262,6 +305,7 @@ in
 
     comfyui = {
       image = "docker.io/library/python:3.13-slim";
+      autoStart = false;
       entrypoint = "/bin/sh";
       cmd = [ "/entry.sh" ];
       # als lmlzr, damit generierte Bilder in output/ dir gehoeren
