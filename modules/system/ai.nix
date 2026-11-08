@@ -194,7 +194,8 @@ let
     start() {
       # einzeln, sonst greift die polkit-Regel nicht (Sammelauftrag ohne Unit-Namen)
       for u in "''${units[@]}"; do systemctl start "$u" || return 1; done
-      echo "KI läuft: http://localhost:3000 (Handy: http://10.0.0.193:3000)"
+      echo "KI läuft: Chat/Bilder http://localhost:3000 (Handy: http://10.0.0.193:3000)"
+      echo "          Videos (ComfyUI) http://localhost:8188"
     }
     stop() {
       for u in "''${units[@]}"; do systemctl stop "$u"; done
