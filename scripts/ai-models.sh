@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Laedt die Modelle fuer modules/system/ai.nix nach /mnt/Big_SSD/ai (~70 GB).
+# Laedt die Modelle fuer modules/system/ai.nix nach /mnt/Big_SSD/ai (~87 GB).
 # Fortsetzbar: abgebrochene Downloads laufen beim naechsten Aufruf weiter.
 set -euo pipefail
 
@@ -31,6 +31,12 @@ Z=Comfy-Org/Z-Image-Turbo
 get $Z split_files/diffusion_models/z_image_turbo_bf16.safetensors "$AI/comfyui/models/diffusion_models/z_image_turbo_bf16.safetensors"
 get $Z split_files/text_encoders/qwen_3_4b.safetensors             "$AI/comfyui/models/text_encoders/qwen_3_4b.safetensors"
 get $Z split_files/vae/ae.safetensors                              "$AI/comfyui/models/vae/ae.safetensors"
+
+# Videogenerierung (ComfyUI, Wan 2.2 5B Text/Bild-zu-Video, Vorlage "Wan 2.2 5B" in ComfyUI)
+W=Comfy-Org/Wan_2.2_ComfyUI_Repackaged
+get $W split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors "$AI/comfyui/models/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors"
+get $W split_files/vae/wan2.2_vae.safetensors                       "$AI/comfyui/models/vae/wan2.2_vae.safetensors"
+get Comfy-Org/Wan_2.1_ComfyUI_repackaged split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors "$AI/comfyui/models/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
 
 curl -s -d "KI-Modelle fertig geladen ($(du -sh "$AI" | cut -f1))" https://push.lmlzr.com/claude >/dev/null || true
 echo "fertig"
