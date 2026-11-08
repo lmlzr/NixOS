@@ -9,7 +9,41 @@ let
   llamaCpp = pkgs.llama-cpp.override { vulkanSupport = true; };
   llamaServer = "${llamaCpp}/bin/llama-server";
   # --fit (Standard: an) verteilt Layer/MoE-Experten selbst auf VRAM und RAM
-  serve = args: "${llamaServer} --port \${PORT} --no-webui ${args}";
+  serve = args: "${waitComfy} ${llamaServer} --port \${PORT} --no-webui ${args}";
+
+  # LLM und ComfyUI duerfen nie gleichzeitig im VRAM sein: 12 GB reichen nicht,
+  # Vulkan (llama.cpp) + ROCm (ComfyUI) parallel liess die GPU haengen (2026-11-08).
+  # LLM-Start wartet, bis ComfyUI nichts rechnet, und laesst ComfyUI seinen VRAM freigeben.
+  waitComfy = pkgs.writeShellScript "wait-comfyui" ''
+    while ${pkgs.curl}/bin/curl -sf http://127.0.0.1:8188/queue | ${pkgs.gnugrep}/bin/grep -q '"queue_running": \[\['; do
+      sleep 2
+    done
+    ${pkgs.curl}/bin/curl -sf -X POST -H 'Content-Type: application/json' \
+      -d '{"unload_models":true,"free_memory":true}' http://127.0.0.1:8188/free >/dev/null || true
+    exec "$@"
+  '';
+  # Gegenrichtung: vor jedem ComfyUI-Auftrag alle LLMs in llama-swap entladen
+  comfyLlamaUnload = pkgs.writeText "llama_unload.py" ''
+    import logging
+    import urllib.request
+
+    import execution
+
+    _execute = execution.PromptExecutor.execute
+
+
+    def execute(self, *args, **kwargs):
+        try:
+            urllib.request.urlopen("http://127.0.0.1:9292/unload", timeout=60).read()
+            logging.info("llama-swap: LLMs entladen, VRAM frei fuer ComfyUI")
+        except Exception as e:
+            logging.info(f"llama-swap nicht erreichbar ({e}), nichts zu entladen")
+        return _execute(self, *args, **kwargs)
+
+
+    execution.PromptExecutor.execute = execute
+    NODE_CLASS_MAPPINGS = {}
+  '';
 
   # ComfyUI-Quellcode aus nixpkgs (gepinnt), läuft im Container mit PyTorch-ROCm-Wheels
   comfySrc = pkgs.comfyui.src;
@@ -248,7 +282,8 @@ in
     listenAddress = "127.0.0.1";
     port = 9292;
     settings = {
-      healthCheckTimeout = 300;
+      # lang, weil der LLM-Start ggf. auf ein laufendes Video in ComfyUI wartet
+      healthCheckTimeout = 1800;
       models = {
         # schnell, komplett im VRAM, versteht Bilder
         "gemma-4-12b" = {
@@ -318,6 +353,7 @@ in
         "${aiDir}/comfyui:/data"
         "${comfySrc}:/app:ro"
         "${comfyEntry}:/entry.sh:ro"
+        "${comfyLlamaUnload}:/data/custom_nodes/llama_unload.py:ro"
       ];
       environment = {
         PYTHONDONTWRITEBYTECODE = "1";
